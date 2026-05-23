@@ -16,9 +16,13 @@
     </div>
   </header>
 
- 
   <main class="container">
-    <section class="card center">
+    <section class="card center auth-card">
+      <img
+        class="auth-image"
+        src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&amp;fit=crop&amp;w=900&amp;q=80"
+        alt="Hotel exterior entrance"
+      >
       <h1>Customer Login</h1>
 
       <form id="loginForm">
@@ -29,7 +33,6 @@
               id="loginUserId"
               minlength="5"
               maxlength="20"
-            
             >
           </div>
 
@@ -39,28 +42,21 @@
               id="loginPassword"
               type="password"
               maxlength="30"
-            
             >
           </div>
         </div>
+
         <div id="message"></div>
 
         <div class="actions" style="justify-content: center;">
-
-
-          
-   <button type="submit">Login</button>
+          <button type="submit">Login</button>
           <a class="btn btn-secondary" href="../index.html">Back</a>
-     </div>
-     </div>
         </div>
       </form>
-      <br>
-   <a href="customer-register.html">
-    <button type="button">Register here</button>
-  </a>
-       
- </div>
+
+      <div class="actions" style="justify-content: center;">
+        <a class="btn" href="customer-register.html">Register here</a>
+      </div>
     </section>
   </main>
     

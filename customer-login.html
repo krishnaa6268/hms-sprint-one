@@ -1,1 +1,47 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Customer Login</title><link rel="stylesheet" href="style.css"></head><body data-page="customer-login"><header class="header"><a class="brand" href="index.html">Hotel Reservation System</a><div><span id="welcome" class="welcome"></span></div></header><main class="container"><section class="card center"><h1>Customer Login</h1><form id="loginForm"><div class="grid" style="text-align:left"><div class="full"><label>User ID</label><input id="loginUserId" minlength="5" maxlength="20" required></div><div class="full"><label>Password</label><input id="loginPassword" type="password" maxlength="30" required></div></div><div id="message"></div><div class="actions" style="justify-content:center"><button type="submit">Login</button><a class="btn btn-secondary" href="index.html">Back</a></div></form></section></main><footer class="footer">Customer and Admin Reservation Portal</footer><script src="common.js"></script><script src="customer.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customer Login</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body data-page="customer-login">
+    <header class="header">
+      <a class="brand" href="index.html">Hotel Reservation System</a>
+      <div><span id="welcome" class="welcome"></span></div>
+    </header>
+    <main class="container">
+      <section class="card center auth-card">
+        <img
+          class="auth-image"
+          src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&amp;fit=crop&amp;w=900&amp;q=80"
+          alt="Hotel exterior entrance" />
+        <h1>Customer Login</h1>
+        <form id="loginForm">
+          <div class="grid" style="text-align: left">
+            <div class="full">
+              <label>User ID</label><input id="loginUserId" minlength="5"
+                maxlength="20" required />
+            </div>
+            <div class="full">
+              <label>Password</label><input
+                id="loginPassword"
+                type="password"
+                maxlength="30"
+                required />
+            </div>
+          </div>
+          <div id="message"></div>
+          <div class="actions" style="justify-content: center">
+            <button type="submit">Login</button><a class="btn btn-secondary"
+              href="index.html">Back</a>
+          </div>
+        </form>
+      </section>
+    </main>
+    <footer class="footer">Customer and Admin Reservation Portal</footer>
+    <script src="common.js"></script>
+    <script src="customer.js"></script>
+  </body>
+</html>
