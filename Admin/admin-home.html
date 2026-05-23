@@ -9,6 +9,10 @@
 
 <body data-page="admin-home">
   <header class="header">
+    <button class="menu-toggle" type="button" onclick="toggleAdminSidebar()" aria-label="Toggle admin menu">
+      &#9776;
+    </button>
+
     <a class="brand" href="../index.html">Hotel Reservation System</a>
 
    <div class="header-actions">
@@ -33,7 +37,8 @@
   </header>
 
   <main class="container">
-    <nav class="nav">
+    <nav class="nav admin-sidebar">
+      <div class="sidebar-title">Admin Portal</div>
       <a href="admin-home.html">Home</a>
      <a id="reservationMenuLink" href="admin-reservations.html">Reservation</a> <a href="admin-billing.html">Billing Page</a>
       <a href="admin-history.html">History</a>

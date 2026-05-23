@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (protectedAdminPages.includes(page)) {
     requireRole("admin");
+    setupAdminSidebar();
   }
 
   if (page === "admin-login") setupAdminLogin();
@@ -24,6 +25,36 @@ document.addEventListener("DOMContentLoaded", () => {
   if (page === "admin-bookings") loadAdminBookings();
   if (page === "admin-support") setupAdminFeedback();
 });
+
+function setupAdminSidebar() {
+  const sidebar = document.querySelector(".admin-sidebar");
+
+  if (!sidebar) {
+    return;
+  }
+
+  const currentPage = location.pathname.split("/").pop();
+  sidebar.querySelectorAll("a").forEach((link) => {
+    if (link.getAttribute("href") === currentPage) {
+      link.classList.add("active");
+    }
+  });
+
+  sidebar.addEventListener("click", (e) => {
+    if (e.target.closest("a") && window.matchMedia("(max-width: 900px)").matches) {
+      document.body.classList.remove("sidebar-open");
+    }
+  });
+}
+
+function toggleAdminSidebar() {
+  if (window.matchMedia("(max-width: 900px)").matches) {
+    document.body.classList.toggle("sidebar-open");
+    return;
+  }
+
+  document.body.classList.toggle("sidebar-collapsed");
+}
 
 function setupAdminLogin() {
   document.getElementById("loginForm").addEventListener("submit", (e) => {
@@ -142,6 +173,18 @@ function toggleNotifications() {
 
 document.addEventListener("click", (e) => {
   const notificationBox = document.querySelector(".notification-box");
+  const sidebar = document.querySelector(".admin-sidebar");
+  const menuToggle = document.querySelector(".menu-toggle");
+
+  if (
+    document.body.classList.contains("sidebar-open") &&
+    sidebar &&
+    menuToggle &&
+    !sidebar.contains(e.target) &&
+    !menuToggle.contains(e.target)
+  ) {
+    document.body.classList.remove("sidebar-open");
+  }
 
   if (!notificationBox) {
     return;

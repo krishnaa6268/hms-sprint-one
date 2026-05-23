@@ -486,6 +486,110 @@ th {
   color: var(--danger);
 }
 
+.menu-toggle {
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 22px;
+  line-height: 1;
+}
+
+.menu-toggle:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.sidebar-title {
+  color: #8d78b7;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0;
+  padding: 4px 10px 8px;
+  text-transform: uppercase;
+}
+
+body:not([data-page="admin-login"]) {
+  padding-top: 76px;
+}
+
+body:not([data-page="admin-login"]) .header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+body:not([data-page="admin-login"]) .container {
+  width: auto;
+  max-width: none;
+  margin: 24px 28px 70px 292px;
+}
+
+.admin-sidebar {
+  position: fixed;
+  top: 82px;
+  left: 24px;
+  bottom: 58px;
+  width: 236px;
+  margin: 0;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  border-radius: 16px;
+  box-shadow: 0 18px 42px rgba(36, 16, 63, 0.16);
+  z-index: 900;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.admin-sidebar a {
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  color: var(--dark);
+  border-radius: 10px;
+  padding: 12px 13px;
+}
+
+.admin-sidebar a:hover,
+.admin-sidebar a.active {
+  background: var(--primary);
+  color: #fff;
+}
+
+.admin-sidebar a.btn-danger {
+  margin-top: auto;
+  background: #fff0ef;
+  color: var(--danger);
+}
+
+.admin-sidebar a.btn-danger:hover {
+  background: var(--danger);
+  color: #fff;
+}
+
+body.sidebar-collapsed .admin-sidebar {
+  transform: translateX(calc(-100% - 32px));
+}
+
+body.sidebar-collapsed:not([data-page="admin-login"]) .container {
+  margin-left: 28px;
+}
+
+body.sidebar-open::before {
+  content: "";
+  position: fixed;
+  inset: 76px 0 0;
+  background: rgba(15, 23, 42, 0.35);
+  z-index: 850;
+}
+
 img {
   display: block;
   max-width: 100%;
@@ -559,6 +663,23 @@ table {
     margin-top: 20px;
   }
 
+  body:not([data-page="admin-login"]) .container,
+  body.sidebar-collapsed:not([data-page="admin-login"]) .container {
+    margin: 20px 12px 42px;
+  }
+
+  .admin-sidebar {
+    top: 76px;
+    left: 12px;
+    bottom: 16px;
+    width: min(300px, calc(100vw - 24px));
+    transform: translateX(calc(-100% - 24px));
+  }
+
+  body.sidebar-open .admin-sidebar {
+    transform: translateX(0);
+  }
+
   .dashboard-hero {
     grid-template-columns: 1fr;
   }
@@ -571,6 +692,28 @@ table {
 
   .header {
     padding: 14px 16px;
+  }
+
+  body:not([data-page="admin-login"]) {
+    padding-top: 76px;
+  }
+
+  body:not([data-page="admin-login"]) .header {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  body:not([data-page="admin-login"]) .brand {
+    flex: 1;
+    min-width: 150px;
+  }
+
+  body:not([data-page="admin-login"]) .welcome {
+    display: none;
+  }
+
+  body.sidebar-open::before {
+    inset: 76px 0 0;
   }
 
   .brand {
@@ -598,6 +741,12 @@ table {
   .nav {
     display: grid;
     grid-template-columns: 1fr;
+  }
+
+  .admin-sidebar {
+    top: 76px;
+    display: flex;
+    grid-template-columns: none;
   }
 
   .nav a,
