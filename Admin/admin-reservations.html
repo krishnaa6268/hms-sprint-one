@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Reservations</title>
+  <link rel="stylesheet" href="admin_style.css">
+</head>
+
+<body data-page="admin-reservations">
+  <header class="header">
+    <a class="brand" href="../index.html">Hotel Reservation System</a>
+
+    <div>
+      <span id="welcome" class="welcome"></span>
+      <button class="btn-danger" onclick="logout()">Logout</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <nav class="nav">
+      <a href="admin-home.html">Home</a>
+      <a href="admin-reservations.html">Reservation</a>
+      <a href="admin-billing.html">Billing Page</a>
+      <a href="admin-history.html">History</a>
+      <a href="admin-room-status.html">Room Status</a>
+      <a href="admin-bookings.html">Bookings</a>
+      <a href="admin-support.html">Contact Support/Feedback</a>
+      <a class="btn-danger" href="#" onclick="logout()">Logout</a>
+    </nav>
+
+    <section class="card">
+      <h1>Reservation Approval and Check-in</h1>
+
+      <div class="room-count-summary">
+        <div class="room-count-box total-room-box">
+          Total Rooms: <span id="totalRoomCount">0</span>
+        </div>
+
+        <div class="room-count-box available-room-box">
+          Available Rooms: <span id="availableRoomCount">0</span>
+        </div>
+
+        <div class="room-count-box filled-room-box">
+          Filled Rooms: <span id="filledRoomCount">0</span>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Reservation ID</th>
+              <th>User</th>
+              <th>Dates</th>
+              <th>Room</th>
+              <th>Status</th>
+              <th>Bill</th>
+              <th>Admin Action</th>
+            </tr>
+          </thead>
+
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    Customer and Admin Reservation Portal
+  </footer>
+
+  <script src="../common.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

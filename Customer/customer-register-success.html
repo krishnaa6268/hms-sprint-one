@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Success</title>
+  <link rel="stylesheet" href="customer_style.css">
+</head>
+
+<body data-page="customer-register-success">
+  <header class="header">
+    <a class="brand" href="../index.html">Hotel Reservation System</a>
+
+    <div>
+      <span id="welcome" class="welcome"></span>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card center">
+      <h1>Registration Acknowledgment</h1>
+
+      <div class="alert success">
+        Consumer Registration successful.
+      </div>
+
+      <p>
+        <strong>User ID:</strong>
+        <span id="uid"></span>
+      </p>
+
+      <p>
+        <strong>Customer Login ID:</strong>
+        <span id="cid"></span>
+      </p>
+
+      <!-- <p>
+        <strong>13 Digit Customer Number:</strong>
+        <span id="cno"></span>
+      </p> -->
+
+      <div class="actions" style="justify-content: center;">
+        <a class="btn" href="customer-login.html">Go to Login</a>
+        <a class="btn btn-secondary" href="../index.html">First Page</a>
+      </div>
+    </section>
+
+    <script>
+      const c = JSON.parse(localStorage.getItem("lastRegistered") || "{}");
+
+      document.getElementById("uid").textContent = c.generatedUserId || "";
+      document.getElementById("cid").textContent = c.customerId || "";
+      document.getElementById("cno").textContent = c.customerNumber || "";
+    </script>
+  </main>
+
+  <footer class="footer">
+    Customer and Admin Reservation Portal
+  </footer>
+  <script src="../common.js"></script>
+  <script src="../Customer/customer.js"></script>
+</body>
+</html>

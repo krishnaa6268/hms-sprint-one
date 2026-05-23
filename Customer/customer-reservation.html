@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reservation</title>
+  <link rel="stylesheet" href="customer_style.css">
+</head>
+
+<body data-page="customer-reservation">
+  <header class="header">
+    <a class="brand" href="../index.html">Hotel Reservation System</a>
+
+    <div>
+      <span id="welcome" class="welcome"></span>
+      <button class="btn-danger" onclick="logout()">Logout</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <nav class="nav">
+      <a href="customer-home.html">Home</a>
+      <a href="customer-reservation.html">Reservation</a>
+      <a href="customer-billing.html">Billing Page</a>
+      <a href="customer-history.html">History</a>
+      <a href="customer-bookings.html">Bookings</a>
+      <a href="customer-support.html">Contact Support</a>
+      <a class="btn-danger" href="#" onclick="logout()">Logout</a>
+    </nav>
+
+    <section class="card">
+      <h1>New Reservation</h1>
+
+      <form id="reservationForm">
+        <div class="grid">
+          <div>
+            <label for="checkIn">Check-in Date</label>
+            <input id="checkIn" type="date" required>
+          </div>
+
+          <div>
+            <label for="checkOut">Check-out Date</label>
+            <input id="checkOut" type="date" required>
+          </div>
+
+          <div>
+            <label for="guests">Number of Guests</label>
+            <input id="guests" type="number" min="1" max="10" required>
+          </div>
+
+          <div>
+            <label for="roomPreference">Room Preferences</label>
+            <select id="roomPreference" required>
+              <option value="">Select</option>
+                <option>Single Room - ₹3000</option>
+                <option>Double Room - ₹5800</option>
+                <option>Deluxe Room - ₹7300</option>
+                <option>Suite - ₹12050</option>
+            </select>
+          </div>
+          <div>
+            <label for="guestName">Name</label>
+            <input id="guestName" required>
+          </div>
+
+          <div>
+            <label for="contact">Contact</label>
+            <input id="contact" type="number" required>
+          </div>
+
+          <div class="full">
+            <label>Additional Services</label>
+
+            <label>
+              <input
+                class="service"
+                type="checkbox"
+                value="Laundry"
+                style="width: auto;"
+              >
+              Laundry ₹1400
+            </label>
+
+            <label>
+              <input
+                class="service"
+                type="checkbox"
+                value="Food"
+                style="width: auto;"
+              >
+              Food ₹1800
+            </label>
+
+            <label>
+              <input
+                class="service"
+                type="checkbox"
+                value="Spa"
+                style="width: auto;"
+              >
+              Spa ₹3000
+            </label>
+
+            <label>
+              <input
+                class="service"
+                type="checkbox"
+                value="Transport"
+                style="width: auto;"
+              >
+              Transport ₹2000
+            </label>
+          </div>
+        </div>
+
+        <div id="message"></div>
+
+        <div class="actions">
+          <button type="submit">Submit Reservation</button>
+          <button class="btn-secondary" type="reset">Reset</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    Customer and Admin Reservation Portal
+  </footer> 
+   <script src="../common.js"></script>
+  <script src="../Customer/customer.js"></script>
+</body>
+</html>

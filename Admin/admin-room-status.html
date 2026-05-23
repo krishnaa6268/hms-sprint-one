@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Room Status</title>
+  <link rel="stylesheet" href="admin_style.css">
+</head>
+
+<body data-page="admin-room-status">
+  <header class="header">
+    <a class="brand" href="../index.html">Hotel Reservation System</a>
+
+    <div>
+      <span id="welcome" class="welcome"></span>
+      <button class="btn-danger" onclick="logout()">Logout</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <nav class="nav">
+      <a href="admin-home.html">Home</a>
+      <a href="admin-reservations.html">Reservation</a>
+      <a href="admin-billing.html">Billing Page</a>
+      <a href="admin-history.html">History</a>
+      <a href="admin-room-status.html">Room Status</a>
+      <a href="admin-bookings.html">Bookings</a>
+      <a href="admin-support.html">Contact Support/Feedback</a>
+      <a class="btn-danger" href="#" onclick="logout()">Logout</a>
+    </nav>
+
+    <section class="card">
+      <h1>Room Status</h1>
+
+      <form id="roomStatusForm">
+        <div class="grid">
+          <div>
+            <label for="roomCustomerId">Customer ID: 13 digit number</label>
+            <input
+              id="roomCustomerId"
+              maxlength="13"
+              pattern="[0-9]{13}"
+              required
+            >
+          </div>
+        </div>
+
+        <div id="message"></div>
+
+        <div class="actions">
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Sub Floor</th>
+              <th>Room Number</th>
+              <th>Availability</th>
+              <th>Price According to Room Type</th>
+            </tr>
+          </thead>
+
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    Customer and Admin Reservation Portal
+  </footer>
+
+  <script src="../common.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

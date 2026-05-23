@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Support</title>
+  <link rel="stylesheet" href="customer_style.css">
+</head>
+
+<body data-page="customer-support">
+  <header class="header">
+    <a class="brand" href="../index.html">Hotel Reservation System</a>
+
+    <div>
+      <span id="welcome" class="welcome"></span>
+      <button class="btn-danger" onclick="logout()">Logout</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <nav class="nav">
+      <a href="customer-home.html">Home</a>
+      <a href="customer-reservation.html">Reservation</a>
+      <a href="customer-billing.html">Billing Page</a>
+      <a href="customer-history.html">History</a>
+      <a href="customer-bookings.html">Bookings</a>
+      <a href="customer-support.html">Contact Support</a>
+      <a class="btn-danger" href="#" onclick="logout()">Logout</a>
+    </nav>
+
+    <section class="card">
+      <h1>Customer Support</h1>
+
+      <div class="summary-grid">
+        <div class="summary-card">
+          Contact Number
+          <strong>1800-123-456</strong>
+        </div>
+
+        <div class="summary-card">
+          Mail ID
+          <strong style="font-size: 16px;">support@hotelportal.com</strong>
+        </div>
+
+        <div class="summary-card">
+          Address
+          <strong style="font-size: 16px;">Hotel Avenue, Hyderabad</strong>
+        </div>
+      </div>
+
+      <h2>Feedback for Service and Stay</h2>
+
+      <form id="feedbackForm">
+        <div class="grid">
+          <div>
+            <label>Name</label>
+            <input required>
+          </div>
+
+          <div>
+            <label>Email</label>
+            <input type="email" required>
+          </div>
+
+          <div>
+            <label>Rating</label>
+            <select required>
+              <option value="">Select</option>
+              <option>Excellent</option>
+              <option>Good</option>
+              <option>Average</option>
+              <option>Poor</option>
+            </select>
+          </div>
+
+          <div class="full">
+            <label>Feedback</label>
+            <textarea required></textarea>
+          </div>
+        </div>
+
+        <div id="message"></div>
+
+        <div class="actions">
+          <button type="submit">Submit Feedback</button>
+          <a class="btn btn-secondary" href="customer-complaint.html">
+            Complaint
+          </a>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    Customer and Admin Reservation Portal
+  </footer>
+  <script src="../common.js"></script>
+  <script src="../Customer/customer.js"></script>
+</body>
+</html>

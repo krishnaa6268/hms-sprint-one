@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bill Payment</title>
+  <link rel="stylesheet" href="customer_style.css">
+</head>
+
+<body data-page="customer-payment">
+  <header class="header">
+    <a class="brand" href="../index.html">Hotel Reservation System</a>
+    <div>
+      <span id="welcome" class="welcome"></span>
+      <button class="btn-danger" onclick="logout()">Logout</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <nav class="nav">
+      <a href="customer-home.html">Home</a>
+      <a href="customer-reservation.html">Reservation</a>
+      <a href="customer-billing.html">Billing Page</a>
+      <a href="customer-history.html">History</a>
+      <a href="customer-bookings.html">Bookings</a>
+      <a href="customer-support.html">Contact Support</a>
+      <a class="btn-danger" href="#" onclick="logout()">Logout</a>
+    </nav>
+
+    <section class="card">
+      <h1>Bill Payment Page</h1>
+
+      <div class="invoice">
+        <p>
+          <strong>Reservation ID:</strong>
+          <span id="bookingId"></span>
+        </p>
+
+        <p>
+          <strong>Bill Amount:</strong>
+          <input id="billAmount" readonly>
+        </p>
+
+        <p>
+          <strong>Mode of Payment:</strong>
+          Debit/Credit
+        </p>
+      </div>
+
+      <div class="actions">
+        <a id="payNow" class="btn">Pay Now</a>
+        <a class="btn btn-secondary" href="customer-home.html">Back to Home</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    Customer and Admin Reservation Portal
+  </footer>
+  <script src="../common.js"></script>
+  <script src="../Customer/customer.js"></script>
+</body>
+</html>

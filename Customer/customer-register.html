@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Registration</title>
+  <link rel="stylesheet" href="customer_style.css">
+</head>
+
+<body data-page="customer-register">
+  <header class="header">
+    <a class="brand" href="../index.html">Hotel Reservation System</a>
+
+    <div>
+      <span id="welcome" class="welcome"></span>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h1>Customer Self Registration</h1>
+
+      <form id="registerForm">
+        <h3>Personal Information</h3>
+
+        <div class="grid">
+          <div>
+            <label for="customerName">Customer Name</label>
+            <input
+              id="customerName"
+               type="text"
+              maxlength="50"
+              required
+            >
+          </div>
+
+          <div>
+            <label for="email">Email</label>
+           <input
+            id="email"
+            type="email"
+            pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$"
+            required
+>
+          </div>
+
+          <div>
+            <label for="mobile">Mobile Number</label>
+
+            <div class="mobile-row">
+              <select id="countryCode">
+                <option>+91</option>
+                <option>+1</option>
+                <option>+44</option>
+                <option>+61</option>
+              </select>
+
+              <input
+                id="mobile"
+                type ="p"
+                maxlength="10"
+                pattern="[0-9]{10}"
+                required
+              >
+            </div>
+          </div>
+
+          <!-- <div>
+            <label for="customerNumber">13 Digit Customer Number</label>
+            <input
+              id="customerNumber"
+              maxlength="13"
+              pattern="[0-9]{13}"
+              required
+            >
+          </div> -->
+
+          <div class="full">
+            <label for="address">Address</label>
+            <textarea id="address" required></textarea>
+          </div>
+        </div>
+
+        <h3>Username and Password</h3>
+
+        <div class="grid">
+          <div>
+            <label for="customerId">Customer ID</label>
+            <input
+              id="customerId"
+              minlength="5"
+              maxlength="20"
+              required
+            >
+          </div>
+
+          <div>
+            <label for="password">Password</label>
+            <input
+              id="password"
+              type="password"
+              maxlength="30"
+              required
+            >
+
+            <span class="small">
+              Uppercase, lowercase and special character required.
+            </span>
+          </div>
+
+          <div>
+            <label for="confirmPassword">Confirm Password</label>
+            <input
+              id="confirmPassword"
+              type="password"
+              maxlength="30"
+              required
+            >
+          </div>
+        </div>
+
+        <div id="message"></div>
+
+        <div class="actions">
+          <button type="submit">Register</button>
+          <button type="reset" class="btn-secondary">Reset</button>
+          <a class="btn btn-secondary" href="customer-login.html">Back</a>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    Customer and Admin Reservation Portal
+  </footer>
+  <script src="../common.js"></script>
+  <script src="../Customer/customer.js"></script>
+</body>
+</html>

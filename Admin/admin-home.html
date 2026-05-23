@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Home</title>
+  <link rel="stylesheet" href="admin_style.css">
+</head>
+
+<body data-page="admin-home">
+  <header class="header">
+    <a class="brand" href="../index.html">Hotel Reservation System</a>
+
+   <div class="header-actions">
+  <span id="welcome" class="welcome"></span>
+
+  <div class="notification-box">
+    <button class="notification-btn" onclick="toggleNotifications()">
+      Notifications
+      <span id="notificationCount" class="notification-count">0</span>
+    </button>
+
+    <div id="notificationPanel" class="notification-panel">
+      <h3>Notifications</h3>
+      <div id="notificationList"></div>
+    </div>
+  </div>
+
+  <button class="btn-danger" onclick="logout()">Logout</button>
+</div>
+
+
+  </header>
+
+  <main class="container">
+    <nav class="nav">
+      <a href="admin-home.html">Home</a>
+     <a id="reservationMenuLink" href="admin-reservations.html">Reservation</a> <a href="admin-billing.html">Billing Page</a>
+      <a href="admin-history.html">History</a>
+      <a href="admin-room-status.html">Room Status</a>
+      <a href="admin-bookings.html">Bookings</a>
+      <a href="admin-support.html">Contact Support/Feedback</a>
+      <a class="btn-danger" href="#" onclick="logout()">Logout</a>
+    </nav>
+
+    <section class="card">
+      <h1>Admin Home Page</h1>
+
+      <p>
+        Use the menu to manage reservations, invoices, room status and histories.
+      </p>
+
+      <div class="summary-grid">
+        <div class="summary-card">
+          Total Reservations
+          <strong id="totalReservations">0</strong>
+        </div>
+
+        <div class="summary-card">
+          Pending Approval
+          <strong id="pendingReservations">0</strong>
+        </div>
+
+        <div class="summary-card">
+          Checked In
+          <strong id="checkedIn">0</strong>
+        </div>
+
+        <div class="summary-card">
+          Paid Invoices
+          <strong id="paidInvoices">0</strong>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    Customer and Admin Reservation Portal
+  </footer>
+
+  <script src="../common.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
