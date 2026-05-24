@@ -97,22 +97,18 @@ function setupCustomerLogin() {
     const userId = loginUserId.value.trim();
     const pass = loginPassword.value;
 
-    // if (!USER_ID_REGEX.test(userId)) {
-    //   return message("User ID must be 5 to 20 characters.", "error");
-    // }
+    if (!USER_ID_REGEX.test(userId)) {
+      return message("User ID must be 5 to 20 characters.", "error");
+    }
 
-    // if (!PASSWORD_REGEX.test(pass)) {
-    //   return message("Invalid password format.", "error");
-    // }
+    const customer = getCustomers().find(
+      (c) => c.customerId === userId && c.password === pass
+    );
 
-    // const customer = getCustomers().find(
-    //   (c) => c.customerId === userId && c.password === pass
-    // );
+    if (!customer) {
+      return message("Invalid customer User ID or Password.", "error");
+    }
 
-    // if (!customer) {
-    //   return message("Invalid customer User ID or Password.", "error");
-    // }
-const customer="abc";
     setSession({
       role: "customer",
       userId: customer.customerId,

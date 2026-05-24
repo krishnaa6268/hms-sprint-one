@@ -34,10 +34,10 @@
         <span id="cid"></span>
       </p>
 
-      <!-- <p>
+      <p>
         <strong>13 Digit Customer Number:</strong>
         <span id="cno"></span>
-      </p> -->
+      </p>
 
       <div class="actions" style="justify-content: center;">
         <a class="btn" href="customer-login.html">Go to Login</a>
@@ -50,7 +50,11 @@
 
       document.getElementById("uid").textContent = c.generatedUserId || "";
       document.getElementById("cid").textContent = c.customerId || "";
-      document.getElementById("cno").textContent = c.customerNumber || "";
+      const customerNumberElement = document.getElementById("cno");
+
+      if (customerNumberElement) {
+        customerNumberElement.textContent = c.customerNumber || "";
+      }
     </script>
   </main>
 

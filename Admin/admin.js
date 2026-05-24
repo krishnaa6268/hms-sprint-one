@@ -60,14 +60,12 @@ function setupAdminLogin() {
   document.getElementById("loginForm").addEventListener("submit", (e) => {
     e.preventDefault();
 
-    // if (
-    //   loginUserId.value.trim() === ADMIN.userId &&
-    //   loginPassword.value === ADMIN.password
-    // ) {
-      
-    // } else {
-    //   message("Invalid admin User ID or Password.", "error");
-    // }
+    if (
+      loginUserId.value.trim() !== ADMIN.userId ||
+      loginPassword.value !== ADMIN.password
+    ) {
+      return message("Invalid admin User ID or Password.", "error");
+    }
 
     setSession({
       role: "admin",
