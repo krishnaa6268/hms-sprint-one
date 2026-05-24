@@ -45,7 +45,14 @@
 
           <div>
             <label for="guests">Number of Guests</label>
-            <input id="guests" type="number" min="1" max="10" required>
+            <input
+              id="guests"
+              type="number"
+              min="1"
+              max="10"
+              placeholder="1"
+              required
+            >
           </div>
 
           <div>
@@ -60,12 +67,27 @@
           </div>
           <div>
             <label for="guestName">Name</label>
-            <input id="guestName" required>
+            <input
+              id="guestName"
+              minlength="2"
+              maxlength="50"
+              pattern="[A-Za-z][A-Za-z .'-]{1,49}"
+              placeholder="Enter guest name"
+              required
+            >
           </div>
 
           <div>
             <label for="contact">Contact</label>
-            <input id="contact" type="number" required>
+            <input
+              id="contact"
+              type="tel"
+              inputmode="numeric"
+              maxlength="10"
+              pattern="[0-9]{10}"
+              placeholder="9876543210"
+              required
+            >
           </div>
 
           <div class="full">

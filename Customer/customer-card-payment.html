@@ -45,22 +45,52 @@
 
           <div>
             <label>Card No</label>
-            <input id="cardNo" type="number" minlength="16" required>
+            <input
+              id="cardNo"
+              type="text"
+              inputmode="numeric"
+              maxlength="16"
+              pattern="[0-9]{16}"
+              placeholder="1234567890123456"
+              required
+            >
           </div>
 
           <div>
             <label>Card Holder Name</label>
-            <input id="cardHolder" minlength="10" required>
+            <input
+              id="cardHolder"
+              type="text"
+              minlength="3"
+              maxlength="50"
+              pattern="[A-Za-z][A-Za-z .'-]{1,49}"
+              placeholder="Name on card"
+              required
+            >
           </div>
 
           <div>
             <label>Expiry Date</label>
-            <input id="expiry" placeholder="MM/YY" required>
+            <input
+              id="expiry"
+              placeholder="MM/YY"
+              maxlength="5"
+              pattern="(0[1-9]|1[0-2])/[0-9]{2}"
+              required
+            >
           </div>
 
           <div>
             <label>CVV</label>
-            <input id="cvv" type="number" minlength="3" required>
+            <input
+              id="cvv"
+              type="password"
+              inputmode="numeric"
+              placeholder="123"
+              maxlength="3"
+              pattern="[0-9]{3}"
+              required
+            >
           </div>
         </div>
 
@@ -78,7 +108,7 @@
 
   <footer class="footer">
     Customer and Admin Reservation Portal
-  </footer> 
+  </footer>
    <script src="../common.js"></script>
   <script src="../Customer/customer.js"></script>
 </body>

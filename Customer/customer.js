@@ -33,29 +33,34 @@ document.addEventListener("DOMContentLoaded", () => {
 function setupRegister() {
   document.getElementById("registerForm").addEventListener("submit", (e) => {
     e.preventDefault();
+    const customers = getCustomers();
 
     const customer = {
       generatedUserId: id("USR"),
-      name: customerName.value.trim(),
-      email: email.value.trim(),
+      name: trimmedValue(customerName),
+      email: trimmedValue(email),
       countryCode: countryCode.value,
-      mobile: mobile.value.trim(),
-      customerNumber: customerNumber.value.trim(),
-      address: address.value.trim(),
-      customerId: customerId.value.trim(),
+      mobile: trimmedValue(mobile),
+      customerNumber: generateCustomerNumber(customers),
+      address: trimmedValue(address),
+      customerId: trimmedValue(customerId),
       password: password.value
     };
+
+    if (!isValidName(customer.name)) {
+      return message("Customer name must be 2 to 50 letters.", "error");
+    }
+
+    if (!isValidEmail(customer.email)) {
+      return message("Enter a valid email address.", "error");
+    }
 
     if (!USER_ID_REGEX.test(customer.customerId)) {
       return message("Customer ID must be 5 to 20 characters.", "error");
     }
 
-    if (!/^\d{10}$/.test(customer.mobile)) {
+    if (!PHONE_REGEX.test(customer.mobile)) {
       return message("Mobile number must contain exactly 10 digits.", "error");
-    }
-
-    if (!/^\d{13}$/.test(customer.customerNumber)) {
-      return message("13 Digit Customer Number must contain exactly 13 digits.", "error");
     }
 
     if (!PASSWORD_REGEX.test(customer.password)) {
@@ -69,16 +74,12 @@ function setupRegister() {
       return message("Password and Confirm Password must match.", "error");
     }
 
-    const customers = getCustomers();
-
     const alreadyExists = customers.some(
-      (c) =>
-        c.customerId === customer.customerId ||
-        c.customerNumber === customer.customerNumber
+      (c) => c.customerId === customer.customerId
     );
 
     if (alreadyExists) {
-      return message("Customer ID or 13 Digit Customer Number already exists.", "error");
+      return message("Customer ID already exists.", "error");
     }
 
     customers.push(customer);
@@ -90,15 +91,31 @@ function setupRegister() {
   });
 }
 
+function generateCustomerNumber(customers) {
+  let customerNumber;
+
+  do {
+    customerNumber = String(Date.now() + Math.floor(Math.random() * 1000))
+      .slice(-13)
+      .padStart(13, "0");
+  } while (customers.some((c) => c.customerNumber === customerNumber));
+
+  return customerNumber;
+}
+
 function setupCustomerLogin() {
   document.getElementById("loginForm").addEventListener("submit", (e) => {
     e.preventDefault();
 
-    const userId = loginUserId.value.trim();
+    const userId = trimmedValue(loginUserId);
     const pass = loginPassword.value;
 
     if (!USER_ID_REGEX.test(userId)) {
       return message("User ID must be 5 to 20 characters.", "error");
+    }
+
+    if (!pass) {
+      return message("Password is required.", "error");
     }
 
     const customer = getCustomers().find(
@@ -220,6 +237,9 @@ function setupReservation() {
     e.preventDefault();
 
     const s = getSession();
+    const guestCount = Number(guests.value);
+    const guest = trimmedValue(guestName);
+    const contactNumber = trimmedValue(contact);
 
 
     const checkInDate = new Date(checkInInput.value);
@@ -237,6 +257,22 @@ function setupReservation() {
       return message("Check-out date must be after check-in date.", "error");
     }
 
+    if (!Number.isInteger(guestCount) || guestCount < 1 || guestCount > 10) {
+      return message("Number of guests must be between 1 and 10.", "error");
+    }
+
+    if (!roomPreference.value) {
+      return message("Please select a room preference.", "error");
+    }
+
+    if (!isValidName(guest)) {
+      return message("Guest name must be 2 to 50 letters.", "error");
+    }
+
+    if (!PHONE_REGEX.test(contactNumber)) {
+      return message("Contact number must contain exactly 10 digits.", "error");
+    }
+
     const services = [...document.querySelectorAll(".service:checked")].map(
       (x) => x.value
     );
@@ -252,11 +288,11 @@ function setupReservation() {
       bookingDate: today(),
       checkIn: checkInInput.value,
       checkOut: checkOutInput.value,
-      guests: Number(guests.value),
+      guests: guestCount,
       roomPreference: roomPreference.value,
       services,
-      guestName: guestName.value.trim(),
-      contact: contact.value.trim(),
+      guestName: guest,
+      contact: contactNumber,
       status: "Pending",
       checkInStatus: "Not Checked In",
       assignedRoomType: "",
@@ -373,20 +409,25 @@ function setupCardPayment() {
   document.getElementById("cardForm").addEventListener("submit", (e) => {
     e.preventDefault();
 
-    if (!/^\d{16,}$/.test(cardNo.value)) {
-      return message("Card number must contain minimum 16 digits.", "error");
+    const cardNumber = trimmedValue(cardNo).replaceAll(" ", "");
+    const holderName = trimmedValue(cardHolder);
+    const expiryDate = trimmedValue(expiry);
+    const cvvNumber = trimmedValue(cvv);
+
+    if (!CARD_NUMBER_REGEX.test(cardNumber)) {
+      return message("Card number must contain exactly 16 digits.", "error");
     }
 
-    if (cardHolder.value.trim().length < 10) {
-      return message("Card holder name must be minimum 10 characters.", "error");
+    if (!isValidName(holderName) || holderName.length < 3) {
+      return message("Card holder name must contain only letters and spaces.", "error");
     }
 
-    if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(expiry.value.trim())) {
-      return message("Expiry Date must be in MM/YY format.", "error");
+    if (!isFutureCardExpiry(expiryDate)) {
+      return message("Expiry date must be a valid future date in MM/YY format.", "error");
     }
 
-    if (!/^\d{3,}$/.test(cvv.value)) {
-      return message("CVV must contain minimum 3 digits.", "error");
+    if (!CVV_REGEX.test(cvvNumber)) {
+      return message("CVV must contain exactly 3 digits.", "error");
     }
 
     const reservations = getReservations();
@@ -585,6 +626,27 @@ function loadCustomerBookings() {
 function setupFeedback() {
   document.getElementById("feedbackForm").addEventListener("submit", (e) => {
     e.preventDefault();
+    const fields = e.target.querySelectorAll("input, select, textarea");
+    const name = trimmedValue(fields[0]);
+    const emailAddress = trimmedValue(fields[1]);
+    const rating = trimmedValue(fields[2]);
+    const feedback = trimmedValue(fields[3]);
+
+    if (!isValidName(name)) {
+      return message("Name must be 2 to 50 letters.", "error");
+    }
+
+    if (!isValidEmail(emailAddress)) {
+      return message("Enter a valid email address.", "error");
+    }
+
+    if (!rating) {
+      return message("Please select a rating.", "error");
+    }
+
+    if (!isValidPlainText(feedback, 10, 500)) {
+      return message("Feedback must be 10 to 500 characters.", "error");
+    }
 
     message("Thank you. Your feedback has been submitted successfully.");
 
@@ -597,6 +659,32 @@ function setupComplaint() {
 
   document.getElementById("complaintForm").addEventListener("submit", (e) => {
     e.preventDefault();
+    const fields = e.target.querySelectorAll("select, input, textarea");
+    const complaintType = trimmedValue(fields[0]);
+    const roomNumber = trimmedValue(fields[1]);
+    const contactNumber = trimmedValue(fields[2]);
+    const customerUserId = trimmedValue(fields[3]);
+    const complaint = trimmedValue(fields[4]);
+
+    if (!complaintType) {
+      return message("Please select a complaint type.", "error");
+    }
+
+    if (!ROOM_NUMBERS.includes(Number(roomNumber))) {
+      return message("Enter a valid room number.", "error");
+    }
+
+    if (!PHONE_REGEX.test(contactNumber)) {
+      return message("Contact number must contain exactly 10 digits.", "error");
+    }
+
+    if (customerUserId !== getSession().userId) {
+      return message("Customer ID must match your logged in account.", "error");
+    }
+
+    if (!isValidPlainText(complaint, 10, 500)) {
+      return message("Complaint details must be 10 to 500 characters.", "error");
+    }
 
     message("Complaint registered successfully. Our support team will contact you.");
 

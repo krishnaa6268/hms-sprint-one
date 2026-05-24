@@ -28,20 +28,24 @@
             <label for="customerName">Customer Name</label>
             <input
               id="customerName"
-               type="text"
+              type="text"
+              minlength="2"
               maxlength="50"
+              pattern="[A-Za-z][A-Za-z .'-]{1,49}"
+              placeholder="Enter full name"
               required
             >
           </div>
 
           <div>
             <label for="email">Email</label>
-           <input
-            id="email"
-            type="email"
-            pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$"
-            required
->
+            <input
+              id="email"
+              type="email"
+              pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$"
+              placeholder="name@example.com"
+              required
+            >
           </div>
 
           <div>
@@ -61,26 +65,21 @@
                 inputmode="numeric"
                 maxlength="10"
                 pattern="[0-9]{10}"
+                placeholder="9876543210"
                 required
               >
             </div>
           </div>
 
-          <div>
-            <label for="customerNumber">13 Digit Customer Number</label>
-            <input
-              id="customerNumber"
-              type="text"
-              inputmode="numeric"
-              maxlength="13"
-              pattern="[0-9]{13}"
-              required
-            >
-          </div>
-
           <div class="full">
             <label for="address">Address</label>
-            <textarea id="address" required></textarea>
+            <textarea
+              id="address"
+              minlength="10"
+              maxlength="250"
+              placeholder="Enter your complete address"
+              required
+            ></textarea>
           </div>
         </div>
 
@@ -93,6 +92,8 @@
               id="customerId"
               minlength="5"
               maxlength="20"
+              pattern=".{5,20}"
+              placeholder="Choose a customer ID"
               required
             >
           </div>
@@ -102,7 +103,9 @@
             <input
               id="password"
               type="password"
+              pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9]).{1,30}"
               maxlength="30"
+              placeholder="Enter password"
               required
             >
 
@@ -116,7 +119,9 @@
             <input
               id="confirmPassword"
               type="password"
+              pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9]).{1,30}"
               maxlength="30"
+              placeholder="Re-enter password"
               required
             >
           </div>

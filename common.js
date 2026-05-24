@@ -26,6 +26,12 @@ const ROOM_NUMBERS = [
 
 const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9]).{1,30}$/;
 const USER_ID_REGEX = /^.{5,20}$/;
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const NAME_REGEX = /^[A-Za-z][A-Za-z .'-]{1,49}$/;
+const PHONE_REGEX = /^\d{10}$/;
+const CUSTOMER_NUMBER_REGEX = /^\d{13}$/;
+const CARD_NUMBER_REGEX = /^\d{16}$/;
+const CVV_REGEX = /^\d{3}$/;
 
 function getData(key) {
   return JSON.parse(localStorage.getItem(key) || "[]");
@@ -100,6 +106,41 @@ function statusBadge(status) {
 
 function customerByUserId(userId) {
   return getCustomers().find((customer) => customer.customerId === userId);
+}
+
+function trimmedValue(elementOrId) {
+  const element = typeof elementOrId === "string"
+    ? document.getElementById(elementOrId)
+    : elementOrId;
+
+  return element ? element.value.trim() : "";
+}
+
+function isValidName(value) {
+  return NAME_REGEX.test(value.trim());
+}
+
+function isValidEmail(value) {
+  return EMAIL_REGEX.test(value.trim());
+}
+
+function isValidPlainText(value, min = 5, max = 250) {
+  const text = value.trim();
+  return text.length >= min && text.length <= max;
+}
+
+function isFutureCardExpiry(value) {
+  const match = value.trim().match(/^(0[1-9]|1[0-2])\/(\d{2})$/);
+
+  if (!match) {
+    return false;
+  }
+
+  const month = Number(match[1]);
+  const year = 2000 + Number(match[2]);
+  const expiryEnd = new Date(year, month, 0, 23, 59, 59);
+
+  return expiryEnd >= new Date();
 }
 
 function requireRole(role) {

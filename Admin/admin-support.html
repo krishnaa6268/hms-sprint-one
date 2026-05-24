@@ -41,17 +41,28 @@
         <div class="grid">
           <div>
             <label>Name</label>
-            <input required>
+            <input
+              minlength="2"
+              maxlength="50"
+              pattern="[A-Za-z][A-Za-z .'-]{1,49}"
+              placeholder="Enter your name"
+              required
+            >
           </div>
 
           <div>
             <label>Email</label>
-            <input type="email" required>
+            <input type="email" placeholder="name@example.com" required>
           </div>
 
           <div class="full">
             <label>Message</label>
-            <textarea required></textarea>
+            <textarea
+              minlength="10"
+              maxlength="500"
+              placeholder="Enter support message"
+              required
+            ></textarea>
           </div>
         </div>
 

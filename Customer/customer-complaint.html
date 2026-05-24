@@ -47,22 +47,47 @@
 
           <div>
             <label>Room Number</label>
-            <input required>
+            <input
+              type="number"
+              min="101"
+              max="304"
+              placeholder="101"
+              required
+            >
           </div>
 
           <div>
             <label>Customer Contact Number</label>
-            <input maxlength="10" pattern="[0-9]{10}" required>
+            <input
+              type="tel"
+              inputmode="numeric"
+              maxlength="10"
+              pattern="[0-9]{10}"
+              placeholder="9876543210"
+              required
+            >
           </div>
 
           <div>
             <label>Customer ID</label>
-            <input id="customerId" required>
+            <input
+              id="customerId"
+              minlength="5"
+              maxlength="20"
+              placeholder="Customer ID"
+              readonly
+              required
+            >
           </div>
 
           <div class="full">
             <label>Complaint Details</label>
-            <textarea required></textarea>
+            <textarea
+              minlength="10"
+              maxlength="500"
+              placeholder="Describe your complaint"
+              required
+            ></textarea>
           </div>
         </div>
 

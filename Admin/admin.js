@@ -59,10 +59,12 @@ function toggleAdminSidebar() {
 function setupAdminLogin() {
   document.getElementById("loginForm").addEventListener("submit", (e) => {
     e.preventDefault();
+    const userId = trimmedValue(loginUserId);
+    const pass = loginPassword.value;
 
     if (
-      loginUserId.value.trim() !== ADMIN.userId ||
-      loginPassword.value !== ADMIN.password
+      userId !== ADMIN.userId ||
+      pass !== ADMIN.password
     ) {
       return message("Invalid admin User ID or Password.", "error");
     }
@@ -428,9 +430,14 @@ function setupAdminBilling() {
   document.getElementById("invoiceForm").addEventListener("submit", (e) => {
     e.preventDefault();
 
-    const userId = invoiceUserId.value.trim();
+    const userId = trimmedValue(invoiceUserId);
     const customer = customerByUserId(userId);
     const box = document.getElementById("invoiceResult");
+
+    if (!USER_ID_REGEX.test(userId)) {
+      box.innerHTML = "";
+      return message("User ID must be 5 to 20 characters.", "error");
+    }
 
     if (!customer) {
       box.innerHTML = `
@@ -538,9 +545,15 @@ function setupAdminHistory() {
   document.getElementById("historyForm").addEventListener("submit", (e) => {
     e.preventDefault();
 
-    const userId = historyUserId.value.trim();
+    const userId = trimmedValue(historyUserId);
     const customer = customerByUserId(userId);
     const body = document.querySelector("tbody");
+
+    if (!USER_ID_REGEX.test(userId)) {
+      message("User ID must be 5 to 20 characters.", "error");
+      body.innerHTML = "";
+      return;
+    }
 
     if (!customer) {
       message("Invalid UserID. No customer found.", "error");
@@ -584,10 +597,10 @@ function setupRoomStatus() {
   document.getElementById("roomStatusForm").addEventListener("submit", (e) => {
     e.preventDefault();
 
-    const custNo = roomCustomerId.value.trim();
+    const custNo = trimmedValue(roomCustomerId);
 
-    if (!/^\d{13}$/.test(custNo)) {
-      return message("Customer ID must be a 13 digit number.", "error");
+    if (!CUSTOMER_NUMBER_REGEX.test(custNo)) {
+      return message("Customer number must contain exactly 13 digits.", "error");
     }
 
     const booked = getReservations()
@@ -659,6 +672,22 @@ function loadAdminBookings() {
 function setupAdminFeedback() {
   document.getElementById("feedbackForm").addEventListener("submit", (e) => {
     e.preventDefault();
+    const fields = e.target.querySelectorAll("input, textarea");
+    const name = trimmedValue(fields[0]);
+    const emailAddress = trimmedValue(fields[1]);
+    const note = trimmedValue(fields[2]);
+
+    if (!isValidName(name)) {
+      return message("Name must be 2 to 50 letters.", "error");
+    }
+
+    if (!isValidEmail(emailAddress)) {
+      return message("Enter a valid email address.", "error");
+    }
+
+    if (!isValidPlainText(note, 10, 500)) {
+      return message("Message must be 10 to 500 characters.", "error");
+    }
 
     message("Feedback/support note submitted successfully.");
 
