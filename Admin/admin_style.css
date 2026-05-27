@@ -420,6 +420,7 @@ th {
   font-size: 14px;
 }
 
+/* -- TEJA -- */
 .glow-reservation {
   animation: reservationGlow 1.2s infinite alternate;
 }

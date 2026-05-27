@@ -28,7 +28,7 @@ const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9]).{1,30}$/;
 const USER_ID_REGEX = /^.{5,20}$/;
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const NAME_REGEX = /^[A-Za-z][A-Za-z .'-]{1,49}$/;
-const PHONE_REGEX = /^\d{10}$/;
+const PHONE_REGEX = /^[6-9]\d{9}$/;
 const CUSTOMER_NUMBER_REGEX = /^\d{13}$/;
 const CARD_NUMBER_REGEX = /^\d{16}$/;
 const CVV_REGEX = /^\d{3}$/;
@@ -171,7 +171,7 @@ function billOf(reservation) {
     1,
     Math.ceil(
       (new Date(reservation.checkOut) - new Date(reservation.checkIn)) /
-        86400000
+      86400000
     )
   );
 

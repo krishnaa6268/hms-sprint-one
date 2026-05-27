@@ -56,6 +56,8 @@ function toggleAdminSidebar() {
   document.body.classList.toggle("sidebar-collapsed");
 }
 
+
+//  <!-- ESU US-3 -->
 function setupAdminLogin() {
   document.getElementById("loginForm").addEventListener("submit", (e) => {
     e.preventDefault();
@@ -129,7 +131,7 @@ function loadAdminNotifications(pendingList) {
         No new reservations.
       </div>
     `;
-
+    // --- TEJA ---
     if (reservationMenuLink) {
       reservationMenuLink.classList.remove("glow-reservation");
     }
@@ -228,6 +230,7 @@ function getFilledRooms(currentBookingId = null) {
     .map((r) => String(r.roomNumber));
 }
 
+// TEJA US-7
 function updateRoomCountSummary() {
   const filledRooms = getFilledRooms();
   const totalRooms = ROOM_NUMBERS.length;
@@ -251,6 +254,7 @@ function updateRoomCountSummary() {
   }
 }
 
+// TEJA US-7 
 function roomOptionsHtml(reservation) {
   const filledRooms = getFilledRooms(reservation.bookingId);
   const locked = isRoomLocked(reservation);
@@ -297,7 +301,7 @@ function selectedServicesText(reservation) {
 }
 
 
- function loadAdminReservations() {
+function loadAdminReservations() {
   const body = document.querySelector("table tbody");
 
   if (!body) {
@@ -366,14 +370,14 @@ function selectedServicesText(reservation) {
 
           <select id="type-${r.bookingId}" disabled>
   ${Object.keys(ROOM_RATES)
-    .map(
-      (x) => `
+          .map(
+            (x) => `
         <option ${(requestedRoomType(r) === x) ? "selected" : ""}>
           ${x}
         </option>
       `
-    )
-    .join("")}
+          )
+          .join("")}
 </select>
 <span class="small locked-note">Requested room type cannot be changed</span>
 
@@ -398,24 +402,24 @@ function updateReservation(bookingId) {
 
   reservation.status = document.getElementById(`status-${bookingId}`).value;
 
-if (reservation.status === "Approved") {
-  if (isRoomLocked(reservation)) {
-    reservation.checkInStatus = reservation.checkedOut ? "Checked Out" : "Checked In";
-  } else {
-    const selectedRoom = document.getElementById(`room-${bookingId}`).value;
-    const filledRooms = getFilledRooms(bookingId);
+  if (reservation.status === "Approved") {
+    if (isRoomLocked(reservation)) {
+      reservation.checkInStatus = reservation.checkedOut ? "Checked Out" : "Checked In";
+    } else {
+      const selectedRoom = document.getElementById(`room-${bookingId}`).value;
+      const filledRooms = getFilledRooms(bookingId);
 
-    if (filledRooms.includes(String(selectedRoom))) {
-      alert("This room is already filled. Please select an available room.");
-      return;
+      if (filledRooms.includes(String(selectedRoom))) {
+        alert("This room is already filled. Please select an available room.");
+        return;
+      }
+
+      reservation.assignedRoomType = requestedRoomType(reservation);
+      reservation.roomNumber = selectedRoom;
+      reservation.checkInStatus = "Checked In";
+      reservation.checkedOut = false;
     }
-
-    reservation.assignedRoomType = requestedRoomType(reservation);
-    reservation.roomNumber = selectedRoom;
-    reservation.checkInStatus = "Checked In";
-    reservation.checkedOut = false;
   }
-}
 
   if (reservation.status === "Rejected") {
     reservation.checkInStatus = "Not Checked In";
@@ -426,6 +430,7 @@ if (reservation.status === "Approved") {
   loadAdminReservations();
 }
 
+// TEJA US-9
 function setupAdminBilling() {
   document.getElementById("invoiceForm").addEventListener("submit", (e) => {
     e.preventDefault();
@@ -480,6 +485,8 @@ function setupAdminBilling() {
   });
 }
 
+
+// US-9
 function adminInvoiceHtml(reservation) {
   const bill = billOf(reservation);
 
@@ -494,12 +501,12 @@ function adminInvoiceHtml(reservation) {
 
 <p>
   <strong>Additional Service Charges:</strong>
-  ${money(b.serviceCharges)}
+  ${money(bill.serviceCharges)}
 </p>
 
       <p>
         <strong>User Details:</strong>
-        ${reservation.customerName} (${reservation.customerUserId})
+        ${reservation.guestName} (${reservation.customerUserId})
       </p>
 
       <p>
@@ -530,6 +537,7 @@ function adminInvoiceHtml(reservation) {
   `;
 }
 
+// US-9
 function finalizeInvoice(bookingId) {
   const list = getReservations();
   const reservation = list.find((x) => x.bookingId === bookingId);
@@ -541,6 +549,7 @@ function finalizeInvoice(bookingId) {
   alert(`Invoice finalized for Reservation ID ${bookingId}`);
 }
 
+// KRISHNA US-11
 function setupAdminHistory() {
   document.getElementById("historyForm").addEventListener("submit", (e) => {
     e.preventDefault();
@@ -593,6 +602,7 @@ function setupAdminHistory() {
   });
 }
 
+// kRISHNA US-12
 function setupRoomStatus() {
   document.getElementById("roomStatusForm").addEventListener("submit", (e) => {
     e.preventDefault();
@@ -614,10 +624,10 @@ function setupRoomStatus() {
         roomNumber < 200
           ? "Single Room"
           : roomNumber < 300
-          ? "Double Room"
-          : roomNumber < 304
-          ? "Deluxe Room"
-          : "Suite";
+            ? "Double Room"
+            : roomNumber < 304
+              ? "Deluxe Room"
+              : "Suite";
 
       const status = booked.includes(String(roomNumber))
         ? "Booked"
@@ -634,7 +644,7 @@ function setupRoomStatus() {
     }).join("");
   });
 }
-
+// C16 UPCOMING BOOKING KARTIK
 function loadAdminBookings() {
   const todayDate = today();
 

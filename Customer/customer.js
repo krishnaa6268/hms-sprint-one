@@ -30,6 +30,8 @@ document.addEventListener("DOMContentLoaded", () => {
   if (page === "customer-complaint") setupComplaint();
 });
 
+
+// ESU US-1 registerForm ----
 function setupRegister() {
   document.getElementById("registerForm").addEventListener("submit", (e) => {
     e.preventDefault();
@@ -60,7 +62,7 @@ function setupRegister() {
     }
 
     if (!PHONE_REGEX.test(customer.mobile)) {
-      return message("Mobile number must contain exactly 10 digits.", "error");
+      return message("Mobile number must contain exactly 10 digits and should be in proper format.", "error");
     }
 
     if (!PASSWORD_REGEX.test(customer.password)) {
@@ -103,6 +105,7 @@ function generateCustomerNumber(customers) {
   return customerNumber;
 }
 
+//  <!-- ESU US-2  C LOGIN-->
 function setupCustomerLogin() {
   document.getElementById("loginForm").addEventListener("submit", (e) => {
     e.preventDefault();
@@ -136,7 +139,7 @@ function setupCustomerLogin() {
     location.href = "customer-home.html";
   });
 }
-
+// KARTIK -C14 CUSTOMER NOTIFI
 function loadCustomerHome() {
   const s = requireRole("customer");
 
@@ -157,7 +160,7 @@ function loadCustomerHome() {
   const list = getReservations().filter(
     (r) => r.customerUserId === s.userId
   );
-
+  // C4 CUSTOMER HOME SRAVYA
   document.getElementById("totalBookings").textContent = list.length;
 
   document.getElementById("approvedBookings").textContent = list.filter(
@@ -220,7 +223,7 @@ function loadCustomerHome() {
 //   });
 // }
 
-// KRISHNA
+// C6 CUSTOMER RESERVATIO SRAVYA
 function setupReservation() {
   const checkInInput = document.getElementById("checkIn");
   const checkOutInput = document.getElementById("checkOut");
@@ -321,7 +324,7 @@ function customerSelectedServicesText(reservation) {
     .join(", ");
 }
 
-
+// KARTIK PAYMENT BOOKING SERVICE C15
 function loadCustomerBilling() {
   const s = getSession();
   const body = document.querySelector("tbody");
@@ -384,7 +387,7 @@ Service Charges
     })
     .join("");
 }
-
+// KARTIK
 function loadPaymentPage() {
   const r = selectedCustomerReservation();
 
@@ -398,7 +401,7 @@ function loadPaymentPage() {
   document.getElementById("payNow").href =
     `customer-card-payment.html?bookingId=${r.bookingId}`;
 }
-// krishna
+// KARTIK C15 CARD 
 function setupCardPayment() {
   const r = selectedCustomerReservation();
 
@@ -517,16 +520,15 @@ function invoiceHtml(r) {
         ${r.paymentStatus}
       </p>
 
-      ${
-        r.transactionId
-          ? `
+      ${r.transactionId
+      ? `
             <p>
               <strong>Transaction ID:</strong>
               ${r.transactionId}
             </p>
           `
-          : ""
-      }
+      : ""
+    }
     </div>
   `;
 }
@@ -551,6 +553,7 @@ function checkout(bookingId) {
   location.href = "customer-home.html";
 }
 
+// Krishna us-10
 function loadCustomerHistory() {
   const list = getReservations().filter(
     (r) => r.customerUserId === getSession().userId
@@ -587,6 +590,7 @@ function fillHistory(list) {
     .join("");
 }
 
+// C15 KARTIK UPCOMING BOOKING
 function loadCustomerBookings() {
   const todayDate = today();
 
